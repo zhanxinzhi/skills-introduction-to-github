@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>反欺凌承诺书签署</title>
+    <style>
+        body {
+            font-family: '微软雅黑', Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #f0f8ff;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        #pledge-text {
+            line-height: 1.8;
+            margin: 25px 0;
+            font-size: 16px;
+            color: #34495e;
+        }
+        .signature-box {
+            border: 2px dashed #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        #signature {
+            font-family: '楷体', cursive;
+            font-size: 24px;
+            color: #e74c3c;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>反欺凌承诺书</h1>
+        
+        <!-- 签署表单 -->
+        <div id="sign-form">
+            <div id="pledge-text">
+                <p>我郑重承诺：</p>
+                <p>1. 永不参与任何形式的校园欺凌行为</p>
+                <p>2. 对欺凌现象不沉默、不纵容</p>
+                <p>3. 及时向老师或家长报告欺凌事件</p>
+                <p>4. 主动帮助需要保护的同学</p>
+                <p>5. 积极传播友善与尊重的价值观</p>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <input type="text" id="userName" placeholder="请输入您的姓名" 
+                       style="padding: 10px; width: 200px; margin-right: 10px;">
+                <button onclick="signPledge()">立即签署</button>
+            </div>
+        </div>
+
+        <!-- 签署结果 -->
+        <div id="signed-result" class="hidden">
+            <div class="signature-box">
+                <p>承诺人：<span id="signature">加载中...</span></p>
+                <p>签署日期：<span id="sign-date"></span></p>
+            </div>
+            <h3 style="color: #27ae60; text-align: center;">感谢您的承诺！</h3>
+            <p style="text-align: center;">请保存本页截图，共同守护校园安全</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="window.print()">打印承诺书</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function signPledge() {
+            const userName = document.getElementById('userName').value;
+            if (!userName.trim()) {
+                alert("请输入您的姓名");
+                return;
+            }
+
+            // 显示签署结果
+            document.getElementById('sign-form').classList.add('hidden');
+            document.getElementById('signed-result').classList.remove('hidden');
+            
+            // 生成签名
+            document.getElementById('signature').textContent = userName;
+            
+            // 生成日期
+            const date = new Date().toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('sign-date').textContent = date;
+            
+            // 简单动画
+            const signatureBox = document.querySelector('.signature-box');
+            signatureBox.style.animation = 'fadeIn 1s';
+        }
+    </script>
+</body>
+</html>
